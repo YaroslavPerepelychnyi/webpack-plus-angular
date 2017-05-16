@@ -1,9 +1,10 @@
-import '../styles/main.scss';
+import '../css/main.scss';
 
 function component () {
     var element = document.createElement('div');
+    const textValue = "Hello world!!!";
 
-    element.innerHTML = "Hello world";
+    element.innerHTML = textValue;
 
     return element;
 }
