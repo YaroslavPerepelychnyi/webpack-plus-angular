@@ -3,6 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var SvgStore = require('webpack-svgstore-plugin');
 
 var extractPlugin = new ExtractTextPlugin({
     filename: 'main.[hash].css'
@@ -69,6 +70,15 @@ module.exports = {
         extractPlugin,
         new HtmlWebpackPlugin({
             template: 'src/index.html' // template for index.html without css and js inputs
+        }),
+        new SvgStore({
+            // svgo options
+            svgoOptions: {
+                plugins: [
+                    { removeTitle: true }
+                ]
+            },
+            prefix: 'icon-'
         }),
         new CleanWebpackPlugin(['dist']) // remove dist folder each time when run webpack
     ]
