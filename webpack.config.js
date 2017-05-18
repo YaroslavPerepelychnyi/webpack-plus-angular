@@ -11,7 +11,7 @@ var extractPlugin = new ExtractTextPlugin({
 
 // webpack consist of entry => module loaders => plugins => output
 module.exports = {
-    entry: './src/js/index.js',
+    entry: './src/app/app.js',
     output: {
         filename: 'bundle.[chunkhash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -43,6 +43,9 @@ module.exports = {
                     test: /\.js$/,
                     use: [
                         {
+                            loader: 'ng-annotate-loader'
+                        },
+                        {
                             loader: 'babel-loader',
                             options: {
                                 presets: ['es2015']
@@ -69,7 +72,7 @@ module.exports = {
     plugins: [
         extractPlugin,
         new HtmlWebpackPlugin({
-            template: 'src/index.html' // template for index.html without css and js inputs
+            template: 'src/index.html' // template for index.html without css and app inputs
         }),
         new SvgStore({
             // svgo options
