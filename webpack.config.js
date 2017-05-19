@@ -11,7 +11,7 @@ var extractPlugin = new ExtractTextPlugin({
 
 // webpack consist of entry => module loaders => plugins => output
 module.exports = {
-    entry: './src/app/app.js',
+    entry: [ 'bootstrap-loader/extractStyles', './src/app/app.js'],
     output: {
         filename: 'bundle.[chunkhash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -38,6 +38,22 @@ module.exports = {
                           }
                       ]
                     })
+                },
+                {
+                    test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+                    use: [
+                        {
+                            loader: 'file-loader'
+                        }
+                    ]
+                },
+                {
+                    test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    use: [
+                        {
+                            loader: 'url-loader?limit=10000'
+                        }
+                    ]
                 },
                 {
                     test: /\.js$/,
